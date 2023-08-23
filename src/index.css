@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,600;6..12,800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.item {
+  @apply capitalize font-body font-semibold mb-4 pr-10 pl-4 py-2 rounded-lg hover:bg-primary-300 hover:shadow-md;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.mask {
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+}
