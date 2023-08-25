@@ -4,5 +4,4 @@ interface LanguageType {
   name: string;
   nativeName: string;
 }
-
 export type { LanguageType };

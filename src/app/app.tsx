@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import Country from "../pages/country/country";
 import Home from "../pages/home/home";
-import { Response } from "../interface/response";
+import { Response } from "../utils/types/response";
 import axios from "axios";
 import useAppContext from "../hooks/use-app-context";
 
@@ -11,8 +11,6 @@ const App: React.FC = () => {
   const [isLoader, setIsLoader] = useState(false);
 
   const { state, handleDispatch } = useAppContext();
-
-  // console.log(state);
 
   useEffect(() => {
     if (Object.values(state.appData.data).length !== 0) return;
@@ -28,8 +26,6 @@ const App: React.FC = () => {
 
         handleDispatch({ type: "save-data", payload: response.data });
         setIsLoader(false);
-       
-        // console.log(response.data[1]);
       } catch (err) {
         console.log(err);
       }
@@ -43,7 +39,11 @@ const App: React.FC = () => {
 
   const darkMode = state.appData.isDark;
   return (
-    <div className={`${darkMode ? "bg-primary-100 " : "bg-secondary-100"}`}>
+    <div
+      className={`h-[100vh]${
+        darkMode ? "bg-primary-100 " : "bg-secondary-100"
+      }`}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home isLoader={isLoader} />}></Route>

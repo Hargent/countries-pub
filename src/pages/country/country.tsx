@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 
-import { CountryItemType } from "../../interface/countryData";
+import { CountryItemType } from "../../utils/types/countryData";
 import Header from "../../components/header/header";
-import { IconArrowLeft } from "../../components/icons";
-import { LanguageType } from "../../interface/language";
+import { IconArrowLeft } from "../../components/icons/icons";
 import { Link } from "react-router-dom";
-import { Response } from "../../interface/response";
+import { Response } from "../../utils/types/response";
+import Spinner from "../../components/spinner/spinner";
 import axios from "axios";
 import useAppContext from "../../hooks/use-app-context";
 import { useEffect } from "react";
@@ -18,13 +18,10 @@ const Country = () => {
 
   const navigate = useNavigate();
   const { state } = useAppContext();
-
-  // console.log(code);
+  const darkMode = state.appData.isDark;
 
   useEffect(() => {
     setIsLoader(true);
-    // if (!code) return;
-    // console.log("starting");
 
     const controller = new AbortController();
     const getCountryData = async () => {
@@ -37,7 +34,6 @@ const Country = () => {
         const countryData = [...response.data].filter(
           (res) => res.alpha3Code === code
         );
-        // console.log(countryData[0]);
 
         setCountryDetails(countryData[0]);
         // setCountryDetails([...countryData]);
@@ -46,18 +42,11 @@ const Country = () => {
           setIsLoader(false);
         }
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
     getCountryData();
-
-    // return () => {
-    //   controller.abort();
-    // };
   }, [code]);
-  // console.log(countryDetails);
-
-  // if (Object.keys(countryDetails).length === 0) ;
 
   const getBorderNames = (arg: string[]) => {
     if (!arg) return [];
@@ -67,12 +56,12 @@ const Country = () => {
     const borderNames = countriesData.filter((country) =>
       arg.includes(country.alpha3Code)
     );
-    // console.log(borderNames);
 
     return borderNames;
   };
 
   const {
+    flags,
     flag,
     name,
     nativeName,
@@ -85,13 +74,12 @@ const Country = () => {
     languages,
     borders
   } = countryDetails;
-  // console.log(nativeName);
 
   let borderNames: { name: string; alpha3Code: string }[] = [];
 
   if (borders) {
     const fetchBorder = getBorderNames(borders);
-    // console.log(fetchBorder);
+
     for (let count = 0; count < fetchBorder.length; count++) {
       const border = fetchBorder.at(count)?.name;
 
@@ -99,96 +87,189 @@ const Country = () => {
       if (border && code) borderNames.push({ name: border, alpha3Code: code });
     }
   }
-  // console.log(borderNames);
 
   return (
     <div>
       <Header />
-      <div>
-        <button type="button" onClick={() => navigate(-1)}>
-          <span>
-            <IconArrowLeft />
-          </span>
-          <span>&nbsp;back</span>
-        </button>
-      </div>
-      <div>
-        {isLoader ? null : (
-          <div>
-            <div>
-              <img src={flag} alt={name} />
-            </div>
-            <div>
-              <span>{name}</span>
-            </div>
-            <div>
-              <p>
-                <span>Native name:&nbsp; &nbsp;</span>
-                <span>{nativeName}</span>
-              </p>
-              <p>
-                <span>Population:&nbsp; &nbsp;</span>
-                <span>{population?.toLocaleString()}</span>
-              </p>
-              <p>
-                <span>Region:&nbsp; &nbsp;</span>
-                <span>{region}</span>
-              </p>
-              <p>
-                <span>Sub region:&nbsp; &nbsp;</span>
-                <span>{subregion}</span>
-              </p>
-              <p>
-                <span>Capital:&nbsp; &nbsp;</span>
-                <span>{capital}</span>
-              </p>
-            </div>
-            <div>
-              <div className="flex">
-                <span>Top level domains:&nbsp; &nbsp;</span>
-                <div>
-                  {topLevelDomain?.map((domain: string, index) => {
-                    return <span key={index}>{domain}</span>;
-                  })}
-                </div>
-              </div>
-              <div className="flex">
-                <span>Currencies:&nbsp; &nbsp;</span>
-                <div>
-                  {currencies?.map((currency, index) => {
-                    return <span key={index}>{currency.name}</span>;
-                  })}
-                </div>
-              </div>
-              <div className="flex">
-                <span>Languages:&nbsp; &nbsp;</span>
-                <div>
-                  {languages?.map((language, index) => {
-                    return (
-                      <span key={index} className="ml-4">
-                        {language.name}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            <div>
-              <span>Border Countries:&nbsp; &nbsp;</span>
+      <div
+        className={`p-6 pb-0 ${
+          darkMode ? "bg-primary-200" : " bg-secondary-200"
+        }`}
+      >
+        <div>
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className={`mb-16 mt-4 capitalize px-4 py-1 flex justify-between items-center font-body font-medium text-xs ${
+              darkMode
+                ? "bg-primary-100 text-secondary-300"
+                : " bg-secondary-100 text-primary-100"
+            }`}
+          >
+            <span>
+              <IconArrowLeft
+                className={`mr-2 ${
+                  darkMode ? "fill-secondary-100" : " fill-primary-100"
+                }`}
+              />
+            </span>
+            <span>&nbsp;back</span>
+          </button>
+        </div>
+
+        <div
+          className={`w-full min-h-[100vh] flex items-start  justify-between  flex-col margin-bottom ${
+            darkMode ? "text-secondary-200" : " text-primary-200"
+          }`}
+        >
+          {isLoader ? (
+            <Spinner />
+          ) : (
+            <>
               <div>
-                {borderNames.map((border, index) => {
-                  return (
-                    <Link to={`/${border.alpha3Code}`}>
-                      <span key={index} className="ml-4">
-                        {border.name}
-                      </span>
-                    </Link>
-                  );
-                })}
+                <img
+                  src={flags?.png ? flags.png : flags?.svg ? flags.svg : flag}
+                  alt={name}
+                />
               </div>
-            </div>
-          </div>
-        )}
+              <div className="flex flex-col justify-between items-start">
+                <span className="font-body font-bold text-xl mb-8">{name}</span>{" "}
+                <div className="h-full flex flex-col items-start justify-between ">
+                  <p>
+                    <span
+                      className={`font-body font-bold text-xs capitalize ${
+                        darkMode ? "text-secondary-200" : "text-primary-300"
+                      }`}
+                    >
+                      Native name:&nbsp; &nbsp;
+                    </span>
+                    <span className={`text-xs`}>{nativeName}</span>
+                  </p>
+                  <p>
+                    <span
+                      className={`font-body font-bold text-xs capitalize ${
+                        darkMode ? "text-secondary-200" : "text-primary-300"
+                      }`}
+                    >
+                      Population:&nbsp; &nbsp;
+                    </span>
+                    <span className={`text-xs`}>
+                      {population?.toLocaleString()}
+                    </span>
+                  </p>
+                  <p>
+                    <span
+                      className={`font-body font-bold text-xs capitalize ${
+                        darkMode ? "text-secondary-200" : "text-primary-300"
+                      }`}
+                    >
+                      Region:&nbsp; &nbsp;
+                    </span>
+                    <span className={`text-xs`}>{region}</span>
+                  </p>
+                  <p>
+                    <span
+                      className={`font-body font-bold text-xs capitalize ${
+                        darkMode ? "text-secondary-200" : "text-primary-300"
+                      }`}
+                    >
+                      Sub region:&nbsp; &nbsp;
+                    </span>
+                    <span className={`text-xs`}>{subregion}</span>
+                  </p>
+                  <p>
+                    <span
+                      className={`font-body font-bold text-xs capitalize ${
+                        darkMode ? "text-secondary-200" : "text-primary-300"
+                      }`}
+                    >
+                      Capital:&nbsp; &nbsp;
+                    </span>
+                    <span className={`text-xs`}>{capital}</span>
+                  </p>
+                </div>
+              </div>
+              <div className="h-full flex flex-col items-start justify-start font-body">
+                <div
+                  className={` mb-8 flex flex-col items-start justify-between`}
+                >
+                  <div className="flex items-center">
+                    <span className={` font-bold text-xs`}>
+                      Top level domains:&nbsp; &nbsp;
+                    </span>
+                    <div>
+                      {topLevelDomain?.map((domain: string, index) => {
+                        return (
+                          <span
+                            key={`${domain}-${index}`}
+                            className={`text-xs`}
+                          >
+                            {domain}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex items-baseline">
+                    <span className={` font-bold text-xs`}>
+                      Currencies:&nbsp; &nbsp;
+                    </span>
+                    <div>
+                      {currencies?.map((currency) => {
+                        return (
+                          <span key={currency.code} className={`text-xs`}>
+                            {currency.name}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex items-baseline">
+                    <span className={` font-bold text-xs flex items-center`}>
+                      Languages:&nbsp; &nbsp;
+                    </span>
+                    <div>
+                      {languages?.map((language, index) => {
+                        return (
+                          <span key={language.nativeName} className={`text-xs`}>
+                            {language.name}
+                            {index < languages?.length ? ", " : null}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+                <div className={`flex flex-col items-start justify-start`}>
+                  <span
+                    className={` font-body font-bold text-sm ${
+                      darkMode ? "text-secondary-200" : " text-primary-300"
+                    }`}
+                  >
+                    Border Countries:&nbsp; &nbsp;
+                  </span>
+                  <div
+                    className={`my-2 flex items-center justify-start bg-red flex-wrap margin-right`}
+                  >
+                    {borderNames.map((border) => {
+                      return (
+                        <Link
+                          className={`px-2 py-0.5 shadow-lg font-body font-medium text-xs mb-4 rounded-sm ${
+                            darkMode ? " bg-primary-100" : "bg-secondary-100"
+                          }`}
+                          to={`/${border.alpha3Code}`}
+                          key={border.alpha3Code}
+                        >
+                          <span className="text-xs p-1.5">{border.name}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

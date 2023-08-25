@@ -1,4 +1,4 @@
-import { IconChevronDown, IconChevronUp } from "../icons";
+import { IconCancel, IconChevronDown, IconChevronUp } from "../icons/icons";
 import { useEffect, useState } from "react";
 
 import findUniqueStrings from "../../helpers/unique-array";
@@ -39,10 +39,9 @@ const Filter = () => {
       setIsFilterDone(true);
     }
   };
-  const AppData = state.appData.data;
-  useEffect(() => {
-    // console.log(dataArr);
 
+  const AppData = state.appData.fluidData;
+  useEffect(() => {
     switch (filterBy.toLowerCase()) {
       case "population":
         setFilterArray([
@@ -62,10 +61,9 @@ const Filter = () => {
         const uniqueArr = findUniqueStrings(arr).slice();
 
         setFilterArray(uniqueArr);
-        // console.log(uniqueArr);
 
         break;
-      case "independent":
+      case "sovereignty":
         setFilterArray(["independent", "dependent"]);
         break;
 
@@ -80,8 +78,6 @@ const Filter = () => {
         ]);
         break;
     }
-
-    // console.log(newArr);
   }, [filterBy]);
   useEffect(() => {
     if (isFilterDone) {
@@ -93,46 +89,89 @@ const Filter = () => {
     };
   }, [isFilterDone]);
 
+  const handleCancel = () => {
+    setFilterBy("");
+    setFilterWith("");
+    setIsFilterDone(true);
+  };
+  const handleBack = () => {
+    setFilterBy("");
+    setFilterWith("");
+    setFiltering(false);
+  };
+  const handleBackBack = () => {
+    setFilterBy("");
+    setFilterWith("");
+    setChooseFilter(false);
+  };
   return (
-    <div>
+    <div className="w-full md:w-[50%] md:flex justify-end">
       <div
-        onClick={() => {
-          setFiltering((val) => !val);
-          if (!filtering && chooseFilter) setChooseFilter(false);
-        }}
-        className={`m-4 mt-20 sm:mt-4 rounded-lg shadow-lg cursor-pointer flex items-center justify-between p-6 sm:p-4  ${
+        className={`m-4 mt-20 sm:mt-4 rounded-lg shadow-lg  p-6 sm:p-4 md:w-[80%]   ${
           darkMode ? "bg-primary-100" : "bg-secondary-100"
+        } ${
+          filterBy === "" ? "flex justify-between items-center" : "filter-grid"
         }`}
       >
-        <span
-          className={`font-body font-semibold  ${
-            darkMode ? "text-secondary-200" : "text-primary-300"
-          }`}
+        <div
+          onClick={() => {
+            setFiltering((val) => !val);
+            if (!filtering && chooseFilter) setChooseFilter(false);
+          }}
+          className={` cursor-pointer filter-grid w-full`}
         >
-          Filter by {filterBy ? filterBy : " ..."}{" "}
-          {filterWith ? ` ( ${filterWith} ) ` : null}
-        </span>
-        <span className="sm:ml-10">
-          {filtering ? (
-            <IconChevronDown
-              className={darkMode ? "fill-secondary-200" : "fill-primary-300"}
+          <span
+            className={`font-body font-semibold  ${
+              darkMode ? "text-secondary-200" : "text-primary-300"
+            }`}
+          >
+            Filter by {filterBy ? filterBy : " ..."}{" "}
+            {filterWith ? ` ( ${filterWith} ) ` : null}
+          </span>
+          <span className="sm:ml-10">
+            {filtering ? (
+              <IconChevronDown
+                className={darkMode ? "fill-secondary-200" : "fill-primary-300"}
+              />
+            ) : (
+              <IconChevronUp
+                className={darkMode ? "fill-secondary-200" : "fill-primary-300"}
+              />
+            )}
+          </span>
+        </div>
+        {filterBy !== "" ? (
+          <div
+            className={`w-full flex items-center justify-end ${
+              filterBy === "" ? "hide" : ""
+            }`}
+          >
+            <IconCancel
+              onClick={() => handleCancel()}
+              className={`${
+                darkMode ? "fill-secondary-200" : "fill-primary-300"
+              } `}
             />
-          ) : (
-            <IconChevronUp
-              className={darkMode ? "fill-secondary-200" : "fill-primary-300"}
-            />
-          )}
-        </span>
+          </div>
+        ) : null}
       </div>
       {/* filter type */}
-      <div>
-        {filtering ? (
-          !chooseFilter ? (
+      {filtering ? (
+        <div>
+          {!chooseFilter ? (
             <div
-              className={`m-4 rounded-lg shadow-lg cursor-pointer flex items-start justify-between p-6 sm:p-4  ${
+              className={`relative m-4 rounded-lg shadow-lg cursor-pointer flex items-start justify-between p-6 sm:p-4  ${
                 darkMode ? "bg-primary-100" : "bg-secondary-100"
               }`}
             >
+              <div className=" absolute right-0 top-0 m-6">
+                <IconCancel
+                  onClick={() => handleBack()}
+                  className={
+                    darkMode ? "fill-secondary-200" : "fill-primary-300"
+                  }
+                />
+              </div>
               <ul
                 className={` flex flex-col items-start justify-center   ${
                   darkMode ? "bg-primary-100" : "bg-secondary-100"
@@ -162,7 +201,7 @@ const Filter = () => {
                 </li>
                 <li
                   onClick={handleMethodSelection}
-                  data-type="independent"
+                  data-type="sovereignty"
                   className={`item ${
                     darkMode
                       ? "text-secondary-200 hover:bg-secondary-200 hover:text-primary-200"
@@ -186,10 +225,18 @@ const Filter = () => {
             </div>
           ) : (
             <div
-              className={`m-4 rounded-lg shadow-lg cursor-pointer flex items-start justify-between p-6 sm:p-4  ${
+              className={`relative m-4 rounded-lg shadow-lg cursor-pointer flex items-start justify-between p-6 sm:p-4 ${
                 darkMode ? "bg-primary-100" : "bg-secondary-100"
               }`}
             >
+              <div className=" absolute right-0 top-0 m-6">
+                <IconCancel
+                  onClick={() => handleBackBack()}
+                  className={
+                    darkMode ? "fill-secondary-200" : "fill-primary-300"
+                  }
+                />
+              </div>
               <ul>
                 {filterArray.map((item, index) => (
                   <li
@@ -207,9 +254,9 @@ const Filter = () => {
                 ))}
               </ul>
             </div>
-          )
-        ) : null}
-      </div>
+          )}
+        </div>
+      ) : null}
       {/* filther methods */}
       {/* i need to filter the state an get unique instances of the type selected that sets */}
       {/* asia */}

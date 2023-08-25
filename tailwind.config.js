@@ -27,6 +27,11 @@ const customStyle = {
       },
       fontFamily:{
         body:['Nunito Sans']
+      },
+      gridTemplateColumns: {
+      
+        // Complex site-specific column configuration
+        'filter': '9fr 1fr',
       }
     },
     keyframes:{

@@ -1,6 +1,7 @@
-import { IconMoonFill, IconSun } from "../icons";
+import { IconMoonFill, IconSun } from "../icons/icons";
 import { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
 import useAppContext from "../../hooks/use-app-context";
 
 const Header = () => {
@@ -22,7 +23,7 @@ const Header = () => {
           stateDarkMode ? "text-secondary-100" : "text-primary-300"
         } `}
       >
-        Where in the world?
+        <Link to={"/"}>Where in the world?</Link>
       </h1>
       <div className="flex justify-between items-center">
         <span

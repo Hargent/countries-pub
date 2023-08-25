@@ -1,5 +1,5 @@
 import { CurrencyType } from "./currencies";
-import { LanguageType } from "./language";
+import { LanguageType } from "./languages";
 
 interface CountryItemType {
   name: string;
@@ -7,11 +7,16 @@ interface CountryItemType {
   region: string;
   capital: string;
   flag: string;
+  flags: {
+    png: string;
+    svg: string;
+  };
   alpha3Code: string;
 
   nativeName: string;
 
   subregion: string;
+  independent: boolean;
 
   topLevelDomain?: string[];
   currencies?: CurrencyType[];
