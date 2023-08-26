@@ -20,12 +20,13 @@ function Home({ isLoader }: Props) {
       }`}
     >
       <Header />
+
       <div className="mx-4 sm:mx-none sm:flex flex-column sm:flex-row sm:justify-between sm:items-start sm:mt-6">
         <Search />
         <Filter />
       </div>
 
-      <div className="w-[80%] min-h-[100%] m-auto mt-20">
+      <div className="w-[80%] min-h-[100%] m-auto mt-20 xl:w-[95%]">
         {isLoader ? <Spinner /> : <CountryList />}
       </div>
     </div>

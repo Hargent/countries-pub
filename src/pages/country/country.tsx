@@ -89,187 +89,221 @@ const Country = () => {
   }
 
   return (
-    <div>
-      <Header />
-      <div
-        className={`p-6 pb-0 ${
-          darkMode ? "bg-primary-200" : " bg-secondary-200"
-        }`}
-      >
-        <div>
-          <button
-            type="button"
-            onClick={() => navigate(-1)}
-            className={`mb-16 mt-4 capitalize px-4 py-1 flex justify-between items-center font-body font-medium text-xs ${
-              darkMode
-                ? "bg-primary-100 text-secondary-300"
-                : " bg-secondary-100 text-primary-100"
-            }`}
-          >
-            <span>
-              <IconArrowLeft
-                className={`mr-2 ${
-                  darkMode ? "fill-secondary-100" : " fill-primary-100"
-                }`}
-              />
-            </span>
-            <span>&nbsp;back</span>
-          </button>
-        </div>
-
-        <div
-          className={`w-full min-h-[100vh] flex items-start  justify-between  flex-col margin-bottom ${
-            darkMode ? "text-secondary-200" : " text-primary-200"
+    <div className={`sm:grid sm:grid-rows-container sm:gap-6 `}>
+      <div className={` `}>
+        <Header />
+      </div>
+      <div className={` px-8 md:px-12  xl:w-full xl:px-12  mt-12 xl:mt-4`}>
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className={`  px-6 py-1 rounded-sm sm:rounded-md ${
+            darkMode
+              ? "bg-primary-100 shadow-dark text-secondary-100 "
+              : "bg-secondary-100 shadow-light text-primary-200"
           }`}
         >
-          {isLoader ? (
-            <Spinner />
-          ) : (
-            <>
-              <div>
-                <img
-                  src={flags?.png ? flags.png : flags?.svg ? flags.svg : flag}
-                  alt={name}
-                />
+          <div className="flex w-full items-center justify-start margin-right">
+            <span>
+              <IconArrowLeft />
+            </span>
+            <span>&nbsp;back</span>
+          </div>
+        </button>
+      </div>
+      <div className={``}>
+        {isLoader ? (
+          <Spinner />
+        ) : (
+          <div
+            className={` px-8 sm:px-12  sm:flex sm:items-start lg:items-center xl:items-start sm:justify-between sm:flex-col xl:flex-row  sm:gap-24 py-12  ${
+              darkMode
+                ? "bg-primary-200 text-secondary-100 "
+                : "bg-secondary-200 text-primary-200"
+            }`}
+          >
+            <div className={`xl:w-[40%] sm:w-4/5 lg:w-3/5 mb-6 sm:mb-0`}>
+              <img
+                className={`sm:w-full`}
+                src={flags?.png ? flags.png : flags?.svg ? flags.svg : flag}
+                alt={name}
+              />
+            </div>
+            <div
+              className={` lg:w-[60%] sm:grid xl:flex xl:flex-col sm:grid-col-2 sm:grid-rows-2 lg:self-center xl:px-12 font-body`}
+            >
+              <div
+                className={`mb-6 font-bold text-3xl sm:w-50%  sm:row-span-1 sm:col-span-1`}
+              >
+                <span className="sm:mr-10">{name}</span>
               </div>
-              <div className="flex flex-col justify-between items-start">
-                <span className="font-body font-bold text-xl mb-8">{name}</span>{" "}
-                <div className="h-full flex flex-col items-start justify-between ">
-                  <p>
-                    <span
-                      className={`font-body font-bold text-xs capitalize ${
-                        darkMode ? "text-secondary-200" : "text-primary-300"
-                      }`}
-                    >
-                      Native name:&nbsp; &nbsp;
-                    </span>
-                    <span className={`text-xs`}>{nativeName}</span>
-                  </p>
-                  <p>
-                    <span
-                      className={`font-body font-bold text-xs capitalize ${
-                        darkMode ? "text-secondary-200" : "text-primary-300"
-                      }`}
-                    >
-                      Population:&nbsp; &nbsp;
-                    </span>
-                    <span className={`text-xs`}>
-                      {population?.toLocaleString()}
-                    </span>
-                  </p>
-                  <p>
-                    <span
-                      className={`font-body font-bold text-xs capitalize ${
-                        darkMode ? "text-secondary-200" : "text-primary-300"
-                      }`}
-                    >
-                      Region:&nbsp; &nbsp;
-                    </span>
-                    <span className={`text-xs`}>{region}</span>
-                  </p>
-                  <p>
-                    <span
-                      className={`font-body font-bold text-xs capitalize ${
-                        darkMode ? "text-secondary-200" : "text-primary-300"
-                      }`}
-                    >
-                      Sub region:&nbsp; &nbsp;
-                    </span>
-                    <span className={`text-xs`}>{subregion}</span>
-                  </p>
-                  <p>
-                    <span
-                      className={`font-body font-bold text-xs capitalize ${
-                        darkMode ? "text-secondary-200" : "text-primary-300"
-                      }`}
-                    >
-                      Capital:&nbsp; &nbsp;
-                    </span>
-                    <span className={`text-xs`}>{capital}</span>
-                  </p>
+              <div
+                className={` sm:flex   sm:justify-between sm:gap-4 xl:items-center sm:mb-6 sm:row-span-1 sm:col-span-1`}
+              >
+                <div className={`mb-10 sm:mb-0 sm:mr-10 sm:w-1/2`}>
+                  <div className={`margin-bottom`}>
+                    <p>
+                      <span
+                        className={`font-bold ${
+                          darkMode
+                            ? " text-secondary-100 "
+                            : " text-primary-300"
+                        }`}
+                      >
+                        Native name:&nbsp; &nbsp;
+                      </span>
+                      <span>{nativeName}</span>
+                    </p>
+                    <p>
+                      <span
+                        className={`font-bold ${
+                          darkMode
+                            ? " text-secondary-100 "
+                            : " text-primary-300"
+                        }`}
+                      >
+                        Population:&nbsp; &nbsp;
+                      </span>
+                      <span>{population?.toLocaleString()}</span>
+                    </p>
+                    <p>
+                      <span
+                        className={`font-bold ${
+                          darkMode
+                            ? " text-secondary-100 "
+                            : " text-primary-300"
+                        }`}
+                      >
+                        Region:&nbsp; &nbsp;
+                      </span>
+                      <span>{region}</span>
+                    </p>
+                    <p>
+                      <span
+                        className={`font-bold ${
+                          darkMode
+                            ? " text-secondary-100 "
+                            : " text-primary-300"
+                        }`}
+                      >
+                        Sub region:&nbsp; &nbsp;
+                      </span>
+                      <span>{subregion}</span>
+                    </p>
+                    <p>
+                      <span
+                        className={`font-bold ${
+                          darkMode
+                            ? " text-secondary-100 "
+                            : " text-primary-300"
+                        }`}
+                      >
+                        Capital:&nbsp; &nbsp;
+                      </span>
+                      <span>{capital}</span>
+                    </p>
+                  </div>
+                </div>
+                <div className={`mb-10 sm:mb-0  sm:w-1/2`}>
+                  <div className={`w-full margin-bottom`}>
+                    <div className={` flex`}>
+                      <span
+                        className={`font-bold ${
+                          darkMode
+                            ? " text-secondary-100 "
+                            : " text-primary-300"
+                        }`}
+                      >
+                        Top level domains:&nbsp; &nbsp;
+                      </span>
+                      <div>
+                        {topLevelDomain?.map((domain: string, index) => {
+                          return (
+                            <span key={`${domain}-${index}`}>{domain}</span>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className={` flex`}>
+                      <span
+                        className={`font-bold ${
+                          darkMode
+                            ? " text-secondary-100 "
+                            : " text-primary-300"
+                        }`}
+                      >
+                        Currencies:&nbsp; &nbsp;
+                      </span>
+                      <div>
+                        {currencies?.map((currency) => {
+                          return (
+                            <span key={currency.code}>{currency.name}</span>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className={` flex`}>
+                      <span
+                        className={`font-bold ${
+                          darkMode
+                            ? " text-secondary-100 "
+                            : " text-primary-300"
+                        }`}
+                      >
+                        Languages:&nbsp; &nbsp;
+                      </span>
+                      <div>
+                        {languages?.map((language, index) => {
+                          return (
+                            <span key={language.nativeName}>
+                              {language.name}
+                              {index < languages?.length &&
+                              languages.at(index + 1)
+                                ? ", "
+                                : null}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="h-full flex flex-col items-start justify-start font-body">
-                <div
-                  className={` mb-8 flex flex-col items-start justify-between`}
+              <div
+                className={` mt-3   sm:flex items-start sm:row-start-2 sm:row-end-3 sm:col-start-2 sm:col-end-3 `}
+              >
+                <span
+                  className={`sm:mr-3  w-1/2 font-bold ${
+                    darkMode ? " text-secondary-100 " : " text-primary-300"
+                  }`}
                 >
-                  <div className="flex items-center">
-                    <span className={` font-bold text-xs`}>
-                      Top level domains:&nbsp; &nbsp;
-                    </span>
-                    <div>
-                      {topLevelDomain?.map((domain: string, index) => {
+                  Border Countries:
+                </span>
+                <div
+                  className={`mt-4 sm:mt-0 flex flex-wrap items-start justify-between w-full`}
+                >
+                  {borderNames.length === 0
+                    ? "No border countries found."
+                    : borderNames.map((border) => {
                         return (
-                          <span
-                            key={`${domain}-${index}`}
-                            className={`text-xs`}
+                          <Link
+                            className={`w-[max-content]  mb-4 mr-4  px-4 py-1 ${
+                              darkMode
+                                ? "bg-primary-100 shadow-dark text-secondary-200 "
+                                : "bg-secondary-100 shadow-light text-primary-100"
+                            }`}
+                            to={`/${border.alpha3Code}`}
+                            key={border.alpha3Code}
                           >
-                            {domain}
-                          </span>
+                            <span>{border.name}</span>
+                          </Link>
                         );
                       })}
-                    </div>
-                  </div>
-                  <div className="flex items-baseline">
-                    <span className={` font-bold text-xs`}>
-                      Currencies:&nbsp; &nbsp;
-                    </span>
-                    <div>
-                      {currencies?.map((currency) => {
-                        return (
-                          <span key={currency.code} className={`text-xs`}>
-                            {currency.name}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <div className="flex items-baseline">
-                    <span className={` font-bold text-xs flex items-center`}>
-                      Languages:&nbsp; &nbsp;
-                    </span>
-                    <div>
-                      {languages?.map((language, index) => {
-                        return (
-                          <span key={language.nativeName} className={`text-xs`}>
-                            {language.name}
-                            {index < languages?.length ? ", " : null}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-                <div className={`flex flex-col items-start justify-start`}>
-                  <span
-                    className={` font-body font-bold text-sm ${
-                      darkMode ? "text-secondary-200" : " text-primary-300"
-                    }`}
-                  >
-                    Border Countries:&nbsp; &nbsp;
-                  </span>
-                  <div
-                    className={`my-2 flex items-center justify-start bg-red flex-wrap margin-right`}
-                  >
-                    {borderNames.map((border) => {
-                      return (
-                        <Link
-                          className={`px-2 py-0.5 shadow-lg font-body font-medium text-xs mb-4 rounded-sm ${
-                            darkMode ? " bg-primary-100" : "bg-secondary-100"
-                          }`}
-                          to={`/${border.alpha3Code}`}
-                          key={border.alpha3Code}
-                        >
-                          <span className="text-xs p-1.5">{border.name}</span>
-                        </Link>
-                      );
-                    })}
-                  </div>
                 </div>
               </div>
-            </>
-          )}
-        </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

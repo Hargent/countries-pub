@@ -20,13 +20,22 @@
   align-items: center;
 }
 .margin-right > *:not(:last-child) {
-  margin-right: 1rem;
+  @apply mr-2;
 }
 .margin-bottom > *:not(:last-child) {
-  margin-bottom: 2rem;
+  @apply mb-2 sm:mb-6 xl:mb-4;
 }
 .hide {
   /* display: none; */
   opacity: 0;
   backface-visibility: hidden;
 }
+.gridRows-4-6 {
+  @media only screen and (min-width: 1280) {
+    grid-template-rows: 40%, 60% !important;
+  }
+}
+.boxShadow {
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.05);
+}
+/* Grids */

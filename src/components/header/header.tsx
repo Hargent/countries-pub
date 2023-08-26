@@ -14,7 +14,8 @@ const Header = () => {
   const stateDarkMode = state.appData.isDark;
   return (
     <div
-      className={`w-full flex shadow-md items-center justify-between py-12 px-6 md:px-12 md:py-8 ${
+      id="header"
+      className={`w-full flex shadow-lg items-center justify-between mb-6 py-12 px-6 md:px-12 md:py-8 ${
         stateDarkMode ? "bg-primary-100 " : "bg-secondary-100"
       }`}
     >

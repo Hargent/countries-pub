@@ -10,9 +10,9 @@ const CountryItem = (props: CountryPropType) => {
 
   return (
     <li>
-      <Link to={`${alpha3Code}`} className="flex h-full">
+      <Link to={`${alpha3Code}`} className=" h-full sm:block">
         <div
-          className={`grid grid-rows-2 mb-10 shadow-lg rounded-lg overflow-hidden ${
+          className={`sm:h-full grid grid-rows-2 mb-10 shadow-lg rounded-lg overflow-hidden ${
             darkMode ? "bg-primary-100" : " bg-secondary-100"
           }`}
         >
