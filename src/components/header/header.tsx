@@ -2,7 +2,7 @@ import { IconMoonFill, IconSun } from "../icons/icons";
 import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import { useAppContext } from "../../hooks/use-app-context";
+import useAppContext from "../../hooks/use-app-context";
 
 const Header = () => {
   const { state, handleDispatch } = useAppContext();

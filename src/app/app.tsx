@@ -5,7 +5,7 @@ import Country from "../pages/country/country";
 import Home from "../pages/home/home";
 import { Response } from "../utils/types/response";
 import axios from "axios";
-import { useAppContext } from "../hooks/use-app-context";
+import useAppContext from "../hooks/use-app-context";
 
 const App: React.FC = () => {
   const [isLoader, setIsLoader] = useState(false);

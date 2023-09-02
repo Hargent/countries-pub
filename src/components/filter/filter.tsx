@@ -2,7 +2,7 @@ import { IconCancel, IconChevronDown, IconChevronUp } from "../icons/icons";
 import { useEffect, useState } from "react";
 
 import findUniqueStrings from "../../helpers/unique-array";
-import { useAppContext } from "../../hooks/use-app-context";
+import useAppContext from "../../hooks/use-app-context";
 
 // dispatch({type:"filter",payload:{
 //     by:region,

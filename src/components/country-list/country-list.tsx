@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import CountryItem from "../country-item/country-item";
 import { CountryItemType } from "../../utils/types/countryData";
 import { IconChevronUp } from "../icons/icons";
-import { useAppContext } from "../../hooks/use-app-context";
+import useAppContext from "../../hooks/use-app-context";
 
 const CountryList = () => {
   const [countryList, setCountryList] = useState([] as Array<CountryItemType>);
