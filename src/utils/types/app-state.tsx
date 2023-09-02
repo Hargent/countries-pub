@@ -1,3 +1,5 @@
+import { ActionType } from "./reducer";
+
 interface AppContextType {
   state: {
     appData: { data: {}; isDark: boolean; selectedId: number; searchData: {} };

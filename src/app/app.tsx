@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 
 import Country from "../pages/country/country";
 import Home from "../pages/home/home";
-import { IconChevronUp } from "../components/icons/icons";
-import { Link } from "react-router-dom";
 import { Response } from "../utils/types/response";
 import axios from "axios";
 import useAppContext from "../hooks/use-app-context";

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import CountryItem from "../country-item/country-item";
 import { CountryItemType } from "../../utils/types/countryData";
 import { IconChevronUp } from "../icons/icons";
-import { Link } from "react-router-dom";
 import useAppContext from "../../hooks/use-app-context";
 
 const CountryList = () => {

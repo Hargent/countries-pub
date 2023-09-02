@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+// import  { useState } from "react";
 
-type Props = {};
+// type Props = {};
 
-const useFetchCountries = (props: Props) => {
-  const [countries, setCountries] = useState([]);
+// const useFetchCountries = (props: Props) => {
+//   const [countries, setCountries] = useState([]);
 
-  return <div>useFetchCountries</div>;
-};
+//   return <div>useFetchCountries</div>;
+// };
 
-export default useFetchCountries;
+// export default useFetchCountries;
