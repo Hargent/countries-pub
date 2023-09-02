@@ -8,4 +8,4 @@ const useAppContext = () => {
   return context;
 };
 
-export default useAppContext;
+export { useAppContext };

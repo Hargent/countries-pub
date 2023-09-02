@@ -1,6 +1,6 @@
 import { CountryPropType } from "../../utils/types/countryData";
 import { Link } from "react-router-dom";
-import useAppContext from "../../hooks/use-app-context";
+import {useAppContext} from "../../hooks/use-app-context";
 
 const CountryItem = (props: CountryPropType) => {
   const { state } = useAppContext();

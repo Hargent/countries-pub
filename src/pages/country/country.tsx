@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Response } from "../../utils/types/response";
 import Spinner from "../../components/spinner/spinner";
 import axios from "axios";
-import useAppContext from "../../hooks/use-app-context";
+import { useAppContext } from "../../hooks/use-app-context";
 import { useEffect } from "react";
 import { useState } from "react";
 
