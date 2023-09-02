@@ -2,7 +2,7 @@ import {
   AppContextProvidersProps,
   AppContextType
 } from "../utils/types/context";
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 
 import { ActionType } from "../utils/types/reducer";
 import { REDUCER_ACTION } from "../utils/constants/reducer";
@@ -113,5 +113,11 @@ const AppContextProviders = ({ children }: AppContextProvidersProps) => {
     <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 };
+const useAppContext = () => {
+  const context = useContext(AppContext);
 
-export { AppContext, AppContextProviders };
+  if (!context) throw new Error("AppContext used Outside of its provider");
+  return context;
+};
+
+export { useAppContext, AppContextProviders };

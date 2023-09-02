@@ -3,7 +3,7 @@ import Filter from "../../components/filter/filter";
 import Header from "../../components/header/header";
 import Search from "../../components/search/search";
 import Spinner from "../../components/spinner/spinner";
-import useAppContext from "../../hooks/use-app-context";
+import { useAppContext } from "../../context/app-context";
 
 type Props = {
   isLoader: boolean;

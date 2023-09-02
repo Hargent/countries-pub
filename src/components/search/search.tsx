@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { IconSearch } from "../icons/icons";
-import useAppContext from "../../hooks/use-app-context";
+import { useAppContext } from "../../context/app-context";
 
 const Search = () => {
   const { state, handleDispatch } = useAppContext();

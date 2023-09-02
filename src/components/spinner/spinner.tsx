@@ -1,4 +1,4 @@
-import useAppContext from "../../hooks/use-app-context";
+import { useAppContext } from "../../context/app-context";
 
 function Spinner() {
   const { state } = useAppContext();
