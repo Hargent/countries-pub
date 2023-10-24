@@ -10,7 +10,19 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://github.com/Hargent/countries-pub/blob/main/src/assets/design/desktop-design-detail-dark.jpg" alt="project-screenshot" width="1440" height="960/">
+<img src="https://github.com/Hargent/countries-pub/blob/main/countries-pub-hargent.netlify.app_%20(2).png" alt="project-screenshot" width="1440" height="960/">
+
+<img src="https://github.com/Hargent/countries-pub/blob/main/countries-pub-hargent.netlify.app_%20(3).png" alt="project-screenshot" width="400" height="400/">
+
+<img src="https://github.com/Hargent/countries-pub/blob/main/countries-pub-hargent.netlify.app_%20(4).png" alt="project-screenshot" width="400" height="400/">
+
+<img src="https://github.com/Hargent/countries-pub/blob/main/countries-pub-hargent.netlify.app_%20(5).png" alt="project-screenshot" width="400" height="400/">
+
+<img src="https://github.com/Hargent/countries-pub/blob/main/countries-pub-hargent.netlify.app_%20(6).png" alt="project-screenshot" width="400" height="400/">
+
+<img src="https://github.com/Hargent/countries-pub/blob/main/countries-pub-hargent.netlify.app_%20(7).png" alt="project-screenshot" width="400" height="400/">
+
+<img src="https://github.com/Hargent/countries-pub/blob/main/countries-pub-hargent.netlify.app_%20(8).png" alt="project-screenshot" width="400" height="400/">
 
   
   
